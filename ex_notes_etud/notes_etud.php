@@ -18,6 +18,10 @@
 class Etudiant{
     private $nom;
     private $notes=array();
+    public function __construct($name,$notes){
+        $nom=$name;
+        $this->notes=$notes;
+    }
     private function afficher_note(){
         foreach($this->$notes as $value){
             echo 'note:'.$value ;
@@ -43,6 +47,17 @@ function success(){
     }
 }};
 ?>
+
+<?php
+    $etudiants = [
+        new Etudiant("Aymen", [11, 13, 18, 7, 10, 13, 2, 5, 1]),
+        new Etudiant("Skander", [15, 9, 8, 16])
+    ];
+    $moya=$etudiants[0].calculer_moyenne();
+    $moys=$s[1].calculer_moyenne();
+    
+?>
+
 <body>
     <div class="row">
     <div class="col container" id="aymen">
@@ -87,14 +102,12 @@ function success(){
       <input type="text" name="note 9" class="form-control" id="floatingPassword" >
   
     </div>
+    <div class="form-floating mb-3">
+      <input type="text" name="moy" value="<?php echo "votre moyenne est".$moya ?>" class="form-control" id="floatingPassword" >
+  
     </div>
-</form>
-<?php echo 'bonjour'.$POST['name']?>
-    
-    
-    
-    
-    
+    </div>
+</form>    
     
     
     
@@ -123,7 +136,13 @@ function success(){
       <input type="text" class="form-control" id="floatingPassword" >
   
     </div>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingPassword" >
+  
+    </div>
 </div>
+
+
 <script></script>
 </body>
 </html>
