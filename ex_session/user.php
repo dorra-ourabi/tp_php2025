@@ -9,7 +9,9 @@
 <?php
 echo ' hello user!'.'<br>';
 session_start();
-
+ if (isset($_POST['reset'])) {
+     session_unset();   
+ }
 
  if (!isset($_SESSION['nb_visite'])){
     $_SESSION['nb_visite']=1;
