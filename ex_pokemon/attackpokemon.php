@@ -130,12 +130,12 @@
     }
 
 class Pokemon {
-    private $name;
-    private $url;
-    private $hp;
-    private $attackPokemon;
+    protected $name;
+    protected $url;
+    protected $hp;
+    protected $attackPokemon;
 
-    public function __construct($name, $url, $hp, AttackPokemon $attackPokemon) {
+    public function __construct($name, $url, $hp, $attackPokemon) {
         $this->name = $name;
         $this->url = $url;
         $this->hp = $hp;
@@ -168,7 +168,7 @@ class Pokemon {
         return $attackPoints;
     }
 
-    private function reduceHp($damage) {
+    public function reduceHp($damage) {
         $this->hp -= $damage;
     }
 
@@ -179,10 +179,133 @@ class Pokemon {
     }
 }
 
+class PokemonFeu extends Pokemon {
+  private $type;
+
+  public function __construct($name, $url, $hp, $attackPokemon, $type){
+      parent::__construct($name, $url, $hp, $attackPokemon);
+      $this->type=$type;
+  }
+
+  public function get_type(){
+      return $this->type;
+  }
+  public function attack(Pokemon $p) {
+      $attackPoints = rand($this->attackPokemon->get_attackMinimal(), $this->attackPokemon->get_attackMaximal());
+      
+      if ($this->attackPokemon->isSpecialAttack()) {
+          $attackPoints *= $this->attackPokemon->get_specialAttack();
+      }
+      if (method_exists($p, 'get_type')) {
+          $str = $p->get_type(); 
+          if ($str == 'plante') {
+              $attackPoints *= 2;
+          }
+          else{
+              $attackPoints *= 0.5;
+          }
+      }
+          $p->reduceHp($attackPoints);
+          return $attackPoints;
+      }
+}
+class PokemonEau extends Pokemon {
+  private $type;
+
+  public function __construct($name, $url, $hp, $attackPokemon, $type){
+      parent::__construct($name, $url, $hp,  $attackPokemon);
+      $this->type=$type;
+  }
+
+  public function get_type(){
+      return $this->type;
+  }
+  public function attack(Pokemon $p) {
+      $attackPoints = rand($this->attackPokemon->get_attackMinimal(), $this->attackPokemon->get_attackMaximal());
+      
+      if ($this->attackPokemon->isSpecialAttack()) {
+          $attackPoints *= $this->attackPokemon->get_specialAttack();
+      }
+      if (method_exists($p, 'get_type')) {
+        $str = $p->get_type(); 
+          if ($str == 'feu') {
+              $attackPoints *= 2;
+          }
+          else{
+              $attackPoints *= 0.5;
+          }
+      }
+          $p->reduceHp($attackPoints);
+          return $attackPoints;
+      }
+}
+class PokemonPlante extends Pokemon {
+  private $type;
+  public function __construct($name, $url, $hp, $attackPokemon, $type){
+      parent::__construct($name, $url, $hp,  $attackPokemon);
+      $this->type=$type;
+  }
+
+  
+
+  public function get_type(){
+      return $this->type;
+  }
+  public function attack(Pokemon $p) {
+      $attackPoints = rand($this->attackPokemon->get_attackMinimal(), $this->attackPokemon->get_attackMaximal());
+      
+      if ($this->attackPokemon->isSpecialAttack()) {
+          $attackPoints *= $this->attackPokemon->get_specialAttack();
+      }
+      if (method_exists($p, 'get_type')) {
+        $str = $p->get_type(); 
+          if ($str == 'eau') {
+              $attackPoints *= 2;
+          }
+          else{
+              $attackPoints *= 0.5;
+          }
+      }
+          $p->reduceHp($attackPoints);
+          return $attackPoints;
+      }
+}
+
+$types = ["eau", "feu", "plante", "normal"];
+$type1= $types[array_rand($types)];
+$type2= $types[array_rand($types)];
+
+
 $att1=new AttackPokemon(10,100,2,20);
-$p1=new Pokemon("Dracaufeu Gigamax","https://l.messenger.com/l.php?u=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%253AANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg%26s&h=AT18GnfXmsJflHAGzEm3yyyarrkosIQctx7QsyxzzJAuLoJglN40-jaERpyzV3BkN_kHdse5WFb4TVTrCAVtNlUhtsxyE0YwXeERnkPM63yTSpLi3B8EM2SYeWK37g",200, $att1);
 $att2=new AttackPokemon(30,80,4,20);
-$p2=new Pokemon("Dracaufeu Gigamax","https://l.messenger.com/l.php?u=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%253AANd9GcRVNJaj8BSGr9Dpucf434GVv4M2YphVDfaDOudcF1ubR4LRPun85dGHrgLweETqhlasXuE%26usqp%3DCAU&h=AT18GnfXmsJflHAGzEm3yyyarrkosIQctx7QsyxzzJAuLoJglN40-jaERpyzV3BkN_kHdse5WFb4TVTrCAVtNlUhtsxyE0YwXeERnkPM63yTSpLi3B8EM2SYeWK37g",200, $att2);
+
+if ($type1=="eau"){
+  $p1=new PokemonEau("dracau eau","https://l.messenger.com/l.php?u=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%253AANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg%26s&h=AT18GnfXmsJflHAGzEm3yyyarrkosIQctx7QsyxzzJAuLoJglN40-jaERpyzV3BkN_kHdse5WFb4TVTrCAVtNlUhtsxyE0YwXeERnkPM63yTSpLi3B8EM2SYeWK37g",200, $att1,"eau");
+}
+elseif($type1=="feu"){
+  $p1=new PokemonFeu("dracau feu","https://l.messenger.com/l.php?u=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%253AANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg%26s&h=AT18GnfXmsJflHAGzEm3yyyarrkosIQctx7QsyxzzJAuLoJglN40-jaERpyzV3BkN_kHdse5WFb4TVTrCAVtNlUhtsxyE0YwXeERnkPM63yTSpLi3B8EM2SYeWK37g",200, $att1,"feu");
+}
+elseif($type1=="plante"){
+  $p1=new PokemonPlante("dracau plante","https://l.messenger.com/l.php?u=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%253AANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg%26s&h=AT18GnfXmsJflHAGzEm3yyyarrkosIQctx7QsyxzzJAuLoJglN40-jaERpyzV3BkN_kHdse5WFb4TVTrCAVtNlUhtsxyE0YwXeERnkPM63yTSpLi3B8EM2SYeWK37g",200, $att1,"plante");
+}
+else{
+  $p1=new Pokemon("dracau nrml","https://l.messenger.com/l.php?u=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%253AANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg%26s&h=AT18GnfXmsJflHAGzEm3yyyarrkosIQctx7QsyxzzJAuLoJglN40-jaERpyzV3BkN_kHdse5WFb4TVTrCAVtNlUhtsxyE0YwXeERnkPM63yTSpLi3B8EM2SYeWK37g",200, $att1);
+}
+
+if ($type2=="eau"){
+  $p2=new PokemonEau("dracau eau","https://l.messenger.com/l.php?u=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%253AANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg%26s&h=AT18GnfXmsJflHAGzEm3yyyarrkosIQctx7QsyxzzJAuLoJglN40-jaERpyzV3BkN_kHdse5WFb4TVTrCAVtNlUhtsxyE0YwXeERnkPM63yTSpLi3B8EM2SYeWK37g",200, $att1,"eau");
+}
+elseif($type2=="feu"){
+  $p2=new PokemonFeu("dracau feu","https://l.messenger.com/l.php?u=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%253AANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg%26s&h=AT18GnfXmsJflHAGzEm3yyyarrkosIQctx7QsyxzzJAuLoJglN40-jaERpyzV3BkN_kHdse5WFb4TVTrCAVtNlUhtsxyE0YwXeERnkPM63yTSpLi3B8EM2SYeWK37g",200, $att1,"feu");
+}
+elseif($type2=="plante"){
+  $p2=new PokemonPlante("dracau plante","https://l.messenger.com/l.php?u=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%253AANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg%26s&h=AT18GnfXmsJflHAGzEm3yyyarrkosIQctx7QsyxzzJAuLoJglN40-jaERpyzV3BkN_kHdse5WFb4TVTrCAVtNlUhtsxyE0YwXeERnkPM63yTSpLi3B8EM2SYeWK37g",200, $att1,"plante");
+}
+else{
+  $p2=new Pokemon("dracau nrml","https://l.messenger.com/l.php?u=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%253AANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg%26s&h=AT18GnfXmsJflHAGzEm3yyyarrkosIQctx7QsyxzzJAuLoJglN40-jaERpyzV3BkN_kHdse5WFb4TVTrCAVtNlUhtsxyE0YwXeERnkPM63yTSpLi3B8EM2SYeWK37g",200, $att1);
+}
+
+
 
 ?>
 <!-- the body of the game-->
@@ -196,10 +319,10 @@ $p2=new Pokemon("Dracaufeu Gigamax","https://l.messenger.com/l.php?u=https%3A%2F
 <table class="table" >
   <thead>
     <tr>
-      <th scope="col">Dracaufeu Gigamax :
+      <th scope="col"><?php echo $p1->getName() ?>
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg&s" class="dragon">
       </th>
-      <th scope="col">Dracaufeu Gigamax:
+      <th scope="col"><?php echo $p2->getName() ?>
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVNJaj8BSGr9Dpucf434GVv4M2YphVDfaDOudcF1ubR4LRPun85dGHrgLweETqhlasXuE&usqp=CAU" class="dragon">
       </th>
      
