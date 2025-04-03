@@ -13,14 +13,48 @@
             border-radius:2px;
         }
       .title{
-        background-color:rgb(152, 214, 233);
+        background-color:rgb(186, 227, 239);
         margin:20px 20px 20px 20px;
       }
-      tr{
-        background-color:rgb(234, 228, 228);
-      }
       
-    </style>
+  
+
+      .dragon{
+        height:50px;
+        width:50px;
+        margin-left:20px;
+      }
+           
+      .result{
+        background-color:grey;
+      }
+      .round{
+            width: 700px;
+            height: 100px;
+            margin: 20px 20px 20px 20px ;
+            background-color:rgb(238, 193, 199);
+            border: 1px solid black;
+            border-radius:5px;
+            padding-left:5px;
+            
+        
+        
+       
+    }
+     .round table tr,.round table td{
+        background-color:rgb(172, 172, 161);
+     }
+    .round table {
+        width: 670px;
+        margin:20px 20px 20px 20px ;
+        border-radius:5px;
+        border: 1px solid black;
+        
+       
+    }
+    
+          
+      </style>
 </head>
 <body>
     <div class="row">
@@ -31,43 +65,232 @@
 <table class="table" >
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
+      <th scope="col">Dracaufeu Gigamax :
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg&s" class="dragon">
+      </th>
+      <th scope="col">Dracaufeu Gigamax:
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVNJaj8BSGr9Dpucf434GVv4M2YphVDfaDOudcF1ubR4LRPun85dGHrgLweETqhlasXuE&usqp=CAU" class="dragon">
+      </th>
      
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
+      <td scope="row" >points: 200</td>
+      <td>points: 200 </td>
       
       
     </tr>
     <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
+      <td scope="row">Min attack point: 10</td>
+      <td>Min Attack point: 30</td>
       
       
     </tr>
     <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
+      <td scope="row">Max Attack points: 100</td>
+      <td colspan="2">Max Attack points: 80</td>
       
     </tr>
+   
     <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
+      <td scope="row">Special attack: 2</td>
+      <td colspan="2">Special attack: 4</td>
       
     </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
+     <tr>
+      <td scope="row">Probability special attack: 20</td>
+      <td colspan="2">Probability special attack: 20</td>
       
     </tr>
   </tbody>
 </table>
+<div class="round">
+<p>Round </p>
+<table class="table table-borderless">
+        <tbody>
+            <tr>
+                <td>200</td>
+                <td>150</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+
+    <table class="table" >
+  <thead>
+    <tr>
+      <th scope="col">Dracaufeu Gigamax :
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg&s" class="dragon">
+      </th>
+      <th scope="col">Dracaufeu Gigamax:
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVNJaj8BSGr9Dpucf434GVv4M2YphVDfaDOudcF1ubR4LRPun85dGHrgLweETqhlasXuE&usqp=CAU" class="dragon">
+      </th>
+     
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td scope="row" >points: 200</td>
+      <td>points: 200 </td>
+      
+      
+    </tr>
+    <tr>
+      <td scope="row">Min attack point: 10</td>
+      <td>Min Attack point: 30</td>
+      
+      
+    </tr>
+    <tr>
+      <td scope="row">Max Attack points: 100</td>
+      <td colspan="2">Max Attack points: 80</td>
+      
+    </tr>
+   
+    <tr>
+      <td scope="row">Special attack: 2</td>
+      <td colspan="2">Special attack: 4</td>
+      
+    </tr>
+     <tr>
+      <td scope="row">Probability special attack: 20</td>
+      <td colspan="2">Probability special attack: 20</td>
+      
+    </tr>
+  </tbody>
+</table>
+<div class="round">
+<p>Round </p>
+<table class="table table-borderless">
+        <tbody>
+            <tr>
+                <td>200</td>
+                <td>150</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+
+
+
+
 </div>
-<div class="col container"></div>
+
+<div class="col container">
+<table class="table" >
+  <thead>
+    <tr>
+      <th scope="col">Dracaufeu Gigamax :
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg&s" class="dragon">
+      </th>
+      <th scope="col">Dracaufeu Gigamax:
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVNJaj8BSGr9Dpucf434GVv4M2YphVDfaDOudcF1ubR4LRPun85dGHrgLweETqhlasXuE&usqp=CAU" class="dragon">
+      </th>
+     
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td scope="row" >points: 200</td>
+      <td>points: 200 </td>
+      
+      
+    </tr>
+    <tr>
+      <td scope="row">Min attack point: 10</td>
+      <td>Min Attack point: 30</td>
+      
+      
+    </tr>
+    <tr>
+      <td scope="row">Max Attack points: 100</td>
+      <td colspan="2">Max Attack points: 80</td>
+      
+    </tr>
+   
+    <tr>
+      <td scope="row">Special attack: 2</td>
+      <td colspan="2">Special attack: 4</td>
+      
+    </tr>
+     <tr>
+      <td scope="row">Probability special attack: 20</td>
+      <td colspan="2">Probability special attack: 20</td>
+      
+    </tr>
+  </tbody>
+</table>
+<div class="round">
+<p>Round </p>
+<table class="table table-borderless">
+        <tbody>
+            <tr>
+                <td>200</td>
+                <td>150</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <table class="table" >
+  <thead>
+    <tr>
+      <th scope="col">Dracaufeu Gigamax :
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg&s" class="dragon">
+      </th>
+      <th scope="col">Dracaufeu Gigamax:
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVNJaj8BSGr9Dpucf434GVv4M2YphVDfaDOudcF1ubR4LRPun85dGHrgLweETqhlasXuE&usqp=CAU" class="dragon">
+      </th>
+     
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td scope="row" >points: 200</td>
+      <td>points: 200 </td>
+      
+      
+    </tr>
+    <tr>
+      <td scope="row">Min attack point: 10</td>
+      <td>Min Attack point: 30</td>
+      
+      
+    </tr>
+    <tr>
+      <td scope="row">Max Attack points: 100</td>
+      <td colspan="2">Max Attack points: 80</td>
+      
+    </tr>
+   
+    <tr>
+      <td scope="row">Special attack: 2</td>
+      <td colspan="2">Special attack: 4</td>
+      
+    </tr>
+     <tr>
+      <td scope="row">Probability special attack: 20</td>
+      <td colspan="2">Probability special attack: 20</td>
+      
+    </tr>
+  </tbody>
+</table>
+<div class="round">
+
+<p>Round </p>
+<table class="table table-borderless">
+        <tbody>
+            <tr>
+                <td>200</td>
+                <td>150</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+</div>
 </div>
 </body>
 </html>
