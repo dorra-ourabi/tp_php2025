@@ -149,11 +149,7 @@ class Pokemon {
         
         if ($this->attackPokemon->isSpecialAttack()) {
             $attackPoints *= $this->attackPokemon->get_specialAttack();
-            echo "{$this->name} réalise une attaque spéciale infligeant $attackPoints dégâts !<br>";
-        } else {
-            echo "{$this->name} attaque et inflige $attackPoints dégâts.<br>";
         }
-
         $p->reduceHp($attackPoints);
         return $attackPoints;
     }
@@ -173,13 +169,6 @@ $att1=new AttackPokemon(10,100,2,20);
 $p1=new Pokemon("Dracaufeu Gigamax","https://l.messenger.com/l.php?u=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%253AANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg%26s&h=AT18GnfXmsJflHAGzEm3yyyarrkosIQctx7QsyxzzJAuLoJglN40-jaERpyzV3BkN_kHdse5WFb4TVTrCAVtNlUhtsxyE0YwXeERnkPM63yTSpLi3B8EM2SYeWK37g",200, $att1);
 $att2=new AttackPokemon(30,80,4,20);
 $p2=new Pokemon("Dracaufeu Gigamax","https://l.messenger.com/l.php?u=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%253AANd9GcRVNJaj8BSGr9Dpucf434GVv4M2YphVDfaDOudcF1ubR4LRPun85dGHrgLweETqhlasXuE%26usqp%3DCAU&h=AT18GnfXmsJflHAGzEm3yyyarrkosIQctx7QsyxzzJAuLoJglN40-jaERpyzV3BkN_kHdse5WFb4TVTrCAVtNlUhtsxyE0YwXeERnkPM63yTSpLi3B8EM2SYeWK37g",200, $att2);
-
-$rounds=array();
-while(!($p1->isDead()) && !($p2->isDead())){
-    $degat1=$p1->attack($p2);
-    $degat2=$p2->attack($p1);
-    $rounds[count($rounds)]=[$degat1,$degat2];
-}
 
 ?>
 
@@ -232,20 +221,61 @@ while(!($p1->isDead()) && !($p2->isDead())){
     </tr>
   </tbody>
 </table>
-<div class="round">
+<?php
+while(!($p1->isDead()) && !($p2->isDead())){
+    $degat1=$p1->attack($p2);
+    $degat2=$p2->attack($p1);
+
+    echo "</table>
+<div class='round'>
 <p>Round </p>
-<table class="table table-borderless">
+<table class='table table-borderless'>
         <tbody>
             <tr>
-                <td>200</td>
-                <td>150</td>
+                <td>$degat1</td>
+                <td>$degat2</td>
             </tr>
         </tbody>
     </table>
-    </div>
-
-    <?php
-    echo "<table class="table" >
+</div>
+<table class='table'>
+  <thead>
+    <tr>
+      <th scope='col'>Dracaufeu Gigamax :
+        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg&s' class='dragon'>
+      </th>
+      <th scope='col'>Dracaufeu Gigamax:
+        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVNJaj8BSGr9Dpucf434GVv4M2YphVDfaDOudcF1ubR4LRPun85dGHrgLweETqhlasXuE&usqp=CAU' class='dragon'>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td scope='row'>points: ". $p1->getHp() ." </td>
+      <td>points: ". $p2->getHp() ." </td>
+    </tr>
+    <tr>
+      <td scope='row'>Min attack point: 10</td>
+      <td>Min Attack point: 30</td>
+    </tr>
+    <tr>
+      <td scope='row'>Max Attack points: 100</td>
+      <td colspan='2'>Max Attack points: 80</td>
+    </tr>
+    <tr>
+      <td scope='row'>Special attack: 2</td>
+      <td colspan='2'>Special attack: 4</td>
+    </tr>
+    <tr>
+      <td scope='row'>Probability special attack: 20</td>
+      <td colspan='2'>Probability special attack: 20</td>
+    </tr>
+  </tbody>
+";
+}
+?>
+<!-- 
+<table class="table" >
   <thead>
     <tr>
       <th scope="col">Dracaufeu Gigamax :
@@ -298,9 +328,7 @@ while(!($p1->isDead()) && !($p2->isDead())){
             </tr>
         </tbody>
     </table>
-    </div>";
-  ?>
-
+    </div> 
     <table class="table" >
   <thead>
     <tr>
@@ -471,121 +499,17 @@ while(!($p1->isDead()) && !($p2->isDead())){
             </tr>
         </tbody>
     </table>
+    </div> -->
+<table class="table table-borderless">
+        <tbody>
+            <tr>
+                <td>Le vainqueur est</td>
+                <td>150</td>
+            </tr>
+        </tbody>
+    </table>
     </div>
-
 </div>
 </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php
-    class AttackPokemon{
-        private int $attackMinimal;
-        private int $attackMaximal;
-        private int $specialAttack;
-        private int $probabilitySpecialAttack;
-        public function __construct(int $am=10,int $aM=50,int $sa=2,int $psa = 50){
-            $this->attackMinimal=$am;
-            $this->attackMaximal=$aM;
-            $this->specialAttack=$sa;
-            $this->probabilitySpecialAttack=$psa;
-        }
-        //affichage
-        public  function affich_attack_stats(){
-            foreach($this as $cle => $valeur) {
-                print "$cle => $valeur\n";
-                }
-        }
-    //getters
-    //getter for the attackMinimal
-        public function get_attackMinimal(){
-            return $this->attackMinimal;
-        }
-    //getter for the attackMaximal
-        public function get_attackMaximal(){
-            return $this->attackMaximal;
-        }
-    //getter for the specialAttack
-        public function get_specialAttack(){
-            return $this->specialAttack;
-        }
-        public function get_probabilitySpecialAttack(){
-            return $this->probabilitySpecialAttack;
-        }
-    //setters
-    //setter for the attackMinimal
-        public function set_attackMinimal(int $am){
-            $this->attackMinimal=$am;
-        }
-    //setter for the attackMaximal
-        public function set_attackMaximal($duration){
-            $this->attackMaximal=$duration;
-        }
-    //setter for the specialAttack
-        public function set_specialAttack($sa){
-            $this->specialAttack=$sa;
-        }
-    //setter for the probabiltySpecialAttack
-    public function set_probabiltySpecialAttack($sa){
-        $this->probabiltySpecialAttack=$sa;
-    }
-} 
-?>
