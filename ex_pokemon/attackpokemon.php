@@ -382,10 +382,10 @@ while(!($p1->isDead()) && !($p2->isDead())){
 <table class='table'>
   <thead>
     <tr>
-      <th scope='col'>Dracaufeu Gigamax :
+      <th scope='col'>" . $p1->getName() ." :
         <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg&s' class='dragon'>
       </th>
-      <th scope='col'>Dracaufeu Gigamax:
+      <th scope='col'>".$p2->getName().":
         <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVNJaj8BSGr9Dpucf434GVv4M2YphVDfaDOudcF1ubR4LRPun85dGHrgLweETqhlasXuE&usqp=CAU' class='dragon'>
       </th>
     </tr>
@@ -439,7 +439,9 @@ while(!($p1->isDead()) && !($p2->isDead())){
                 }?>
 
 
-               
+   
+
+
    
 </div>
 </div>
