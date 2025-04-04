@@ -7,14 +7,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-DQvkBjpPgn7RC31MCQoOeC9TI2kdqa4+BSgNMNj8v77fdC77Kj5zpWFTJaaAoMbC" crossorigin="anonymous">
 </head>
 <?php 
+
 require("ConnexionDB.php");
 $bd=ConnexionBD::getInstance();
+
 //created the database ex1 
 //created the table student
 //inserted the values manually
-$req="select * from student";
-$response=$bd->query($req);
-$elements=$response->fetchALL(PDO::FETCH_OBJ);?>
+$id=$_GET['id'] ?? null;
+if(!$id){
+    header('location:exercice.php');
+}
+
+$req1="select * from student where id=$id";
+$response1=$bd->query($req1);
+$elements1=$response1->fetch(PDO::FETCH_OBJ);?>
 <body>
 <table class="table">
   <thead>
@@ -22,25 +29,21 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ);?>
       <th scope="col">Id</th>
       <th scope="col">Name</th>
       <th scope="col">Birthday</th>
-      <th scope="col">Détail</th>
+      
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($elements as $elem):?>  
+      
     <tr>
-      <th scope="row"><?php echo $elem->id?></th>
-      <td><?php echo $elem->Name?></td>
-      <td><?php echo $elem->Birthday?></td>
-      <td><a href="http://localhost:8000/D%C3%A9tailEtudiant.php?id=<?= $elem->id?>">detail</a></td>
+      <th scope="row"><?php echo $elements1->id?></th>
+      <td><?php echo $elements1->Name?></td>
+      <td><?php echo $elements1->Birthday?></td>
     </tr>
-     <?php endforeach;?>
+   
    
   </tbody>
 </table>
     
 </body>
 </html>
-
-
-
 
