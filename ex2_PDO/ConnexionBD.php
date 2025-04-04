@@ -1,4 +1,16 @@
 <?php
+require_once("Utilisateur.php");
+
+// 🔐 Simulation de connexion (id=1 par exemple)
+session_start();
+if (!isset($_SESSION['utilisateur'])) {
+    $_SESSION['utilisateur'] = Utilisateur::getById(7); // admin ou user
+}
+$utilisateur = $_SESSION['utilisateur'];
+?>
+
+
+<?php
 class ConnexionBD
 {
 private static $_dbname = "ex2";

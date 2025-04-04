@@ -1,3 +1,15 @@
+<?php
+require_once("Utilisateur.php");
+
+// 🔐 Simulation de connexion (id=1 par exemple)
+session_start();
+if (!isset($_SESSION['utilisateur'])) {
+    $_SESSION['utilisateur'] = Utilisateur::getById(7); // admin ou user
+}
+$utilisateur = $_SESSION['utilisateur'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,6 +102,7 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ);?>
           <th>name</th>
           <th>birthday</th>
           <th>Section</th>
+          <th>Actions</th>
           
         </tr>
       </thead>
