@@ -1,13 +1,4 @@
-<?php
-require_once("Utilisateur.php");
 
-// 🔐 Simulation de connexion (id=1 par exemple)
-session_start();
-if (!isset($_SESSION['utilisateur'])) {
-    $_SESSION['utilisateur'] = Utilisateur::getById(7); // admin ou user
-}
-$utilisateur = $_SESSION['utilisateur'];
-?>
 
 
 <!DOCTYPE html>
@@ -95,6 +86,7 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ); ?>
           <th>ID</th>
           <th>désignation</th>
           <th>descrition </th>
+          <th>actions</th>
           
         </tr>
       </thead>
@@ -104,6 +96,7 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ); ?>
           <td><?php echo $elem->id?></td>
           <td><?php echo $elem->désignation?></td>
           <td><?php echo $elem->descrition?></td>
+          <td><a href="http://localhost:8000/sectioninfo.php?des=<?php echo $elem->désignation?>">liste des etudiants inscrit</a></td>
           
           
         </tr>

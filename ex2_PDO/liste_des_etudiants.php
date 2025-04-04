@@ -1,12 +1,19 @@
-<?php
-require_once("Utilisateur.php");
 
-// 🔐 Simulation de connexion (id=1 par exemple)
+<?php
+require("Utilisateur.php");
+
 session_start();
+session_destroy(); //  clears session completely
+session_start();   // start a new one
+/*in my database I inserted 2 lignes the one with
+id=7 is an admin 
+and the other with 
+id=8 is a user*/
 if (!isset($_SESSION['utilisateur'])) {
-    $_SESSION['utilisateur'] = Utilisateur::getById(7); // admin ou user
+    $_SESSION['utilisateur'] = Utilisateur::getById(7); // if you want to be a user change 7 to 8
 }
 $utilisateur = $_SESSION['utilisateur'];
+echo  "you're connected as a ".$utilisateur->getRole();
 ?>
 
 
@@ -57,7 +64,8 @@ $utilisateur = $_SESSION['utilisateur'];
   </style>
 </head>
 
-<?php require("ConnexionBD.php");
+<?php
+
 $bd=ConnexionBD::getInstance();
 $req="select * from etudiant";
 $response=$bd->query($req);
@@ -115,6 +123,13 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ);?>
           <td><?php echo $elem->name?></td>
           <td><?php echo $elem->birthday?></td>
           <td><?php echo $elem->section?></td>
+          <td><a href="http://localhost:8000/info.php?id=<?= $elem->id?>">detail</a>
+          <?php if ($utilisateur->isAdmin()): ?>
+            
+            <a href="http://localhost:8000/delete.php?id=<?php echo $elem->id?>">delete</a>
+            <a href="http://localhost:8000/update.php?id=<?php echo $elem->id?>">update</a>
+            <?php endif;?></td> 
+
           
         </tr>
         <?php endforeach;?>

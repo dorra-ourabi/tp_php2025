@@ -1,17 +1,8 @@
-<?php
-require_once("Utilisateur.php");
-
-// 🔐 Simulation de connexion (id=1 par exemple)
-session_start();
-if (!isset($_SESSION['utilisateur'])) {
-    $_SESSION['utilisateur'] = Utilisateur::getById(7); // admin ou user
-}
-$utilisateur = $_SESSION['utilisateur'];
-?>
 
 
 <?php
 
+//creating the class user with privileges accorded
 class Utilisateur {
     private $id;
     private $username;
@@ -26,24 +17,24 @@ class Utilisateur {
     }
 
     public function isAdmin() {
-        return $this->role === 'admin';
+        return $this->role == 'adminstrateur';
     }
 
     public function isUser() {
-        return $this->role === 'user';
+        return $this->role =='user';
     }
 
     public function getRole() {
         return $this->role;
     }
-
+  //creation d'une instance d'utilisateur avec les données des utilisateurs qu'on a inséré dans la table utilisateur
     public static function getById($id) {
-        require_once("ConnexionBD.php");
+        require("ConnexionBD.php");
         $bd = ConnexionBD::getInstance();
         $req = $bd->prepare("SELECT * FROM utilisateur WHERE id = ?");
         $req->execute([$id]);
-        $user = $req->fetch(PDO::FETCH_ASSOC);
-        return new Utilisateur($user['id'], $user['username'], $user['email'], $user['role']);
+        $user = $req->fetch(PDO::FETCH_OBJ);
+        return new Utilisateur($user->id, $user->username, $user->email, $user->role);
     }
 }
 ?>
