@@ -14,14 +14,23 @@ $bd=ConnexionBD::getInstance();
 //created the database ex1 
 //created the table student
 //inserted the values manually
+
 $id=$_GET['id'] ?? null;
 if(!$id){
     header('location:exercice.php');
 }
 
-$req1="select * from student where id=$id";
+/*$req1="select * from student where id=$id";
+$response1=$bd->query($req1);
+$elements1=$response1->fetch(PDO::FETCH_OBJ);?>*/
+
+//prepare statement
+
+$req1=$bd->prepare("select * from student where id=?");
+$req1->execute($id);
 $response1=$bd->query($req1);
 $elements1=$response1->fetch(PDO::FETCH_OBJ);?>
+
 <body>
 <table class="table">
   <thead>
