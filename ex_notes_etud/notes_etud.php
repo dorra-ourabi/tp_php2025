@@ -42,7 +42,12 @@ class Etudiant {
             echo 'Note: ' . $value . '<br>';
         }
     }
-
+    public function get_name(){
+      return $this->nom;
+    }
+    public function get_table_of_notes(){
+      return $this->notes;
+    }
     // Calculate average
     public function calculer_moyenne() {
         $nb_notes = count($this->notes); // Get number of notes
@@ -74,52 +79,24 @@ $moys=$skander->calculer_moyenne();?>
     <div class="row">
     <div class="col container" id="aymen">
     <form action="notes_etud.php" method="post" >
+     
     <div class="form-floating mb-3">
-       <input type="text" id="nom" value="<?php echo 'Aymen'?>" class="form-control" id="floatingInput">
+       <input type="text" id="nom" value="<?php echo $aymen->get_name()?>" class="form-control" id="floatingInput">
   
     </div>
+    <?php foreach($aymen->get_table_of_notes() as $note):?>
     <div class="form-floating mb-3">
-      <input type="text" id="note1" value="<?php echo '11'?>" class="form-control" id="floatingPassword" >
+      <input type="text"  value="<?php echo  $note?>" class="form-control note" id="floatingInput" >
   
     </div>
-    <div class="form-floating mb-3">
-       <input type="text" id="note2" value="<?php echo '13'?>" class="form-control" id="floatingInput">
-  
-    </div>
-    <div class="form-floating mb-3">
-      <input type="text" id="note3"  value="<?php echo '18'?>"class="form-control" id="floatingPassword" >
-  
-    </div>
-    <div class="form-floating mb-3">
-       <input type="text" id="note4"  value="<?php echo '7'?>" class="form-control" id="floatingInput">
-  
-    </div>
-    <div class="form-floating mb-3">
-      <input type="text" id="note5"  value="<?php echo '10'?>" class="form-control" id="floatingPassword" >
-  
-    </div>
-    <div class="form-floating mb-3">
-       <input type="text" id ="note6"  value="<?php echo '13'?>"class="form-control" id="floatingInput">
-  
-    </div>
-    <div class="form-floating mb-3">
-      <input type="text" id="note7"  value="<?php echo '2'?>" class="form-control" id="floatingPassword" >
-  
-    </div>
-    <div class="form-floating mb-3">
-      <input type="text" id="note8"  value="<?php echo '5'?>" class="form-control" id="floatingPassword" >
-  
-    </div>
-    <div class="form-floating mb-3">
-      <input type="text" id="note9"   value="<?php echo '1'?>"class="form-control" id="floatingPassword" >
-  
-    </div>
+    <?php endforeach ?>
+   
     <div class="form-floating mb-3">
       <input type="text" id="moy" value="<?php echo "votre moyenne est".$moya ?>" class="form-control" id="floatingPassword" >
   
     </div>
     </div>
-</form>    
+   
     
     
     
@@ -127,33 +104,43 @@ $moys=$skander->calculer_moyenne();?>
     
     
     
-<div class="col container" id= "skander">
+    <div class="col container" id="aymen">
+    <form action="notes_etud.php" method="post" >
+     
     <div class="form-floating mb-3">
-       <input type="text" id="skander" value="<?php echo 'Skander'?>" class="form-control" id="floatingInput">
+       <input type="text" id="nom" value="<?php echo $skander->get_name()?>" class="form-control" id="floatingInput">
   
     </div>
+    <?php foreach($skander->get_table_of_notes() as $note):?>
     <div class="form-floating mb-3">
-      <input type="text" id="snote1"  value="<?php echo '15'?>" class="form-control" id="floatingPassword" >
+      <input type="text"  value="<?php echo  $note?>" class="form-control note" id="floatingInput" >
   
     </div>
+    <?php endforeach ?>
+   
     <div class="form-floating mb-3">
-       <input type="text" id="snote2" value="<?php echo '9'?>" class="form-control" id="floatingInput">
+      <input type="text" id="moy" value="<?php echo "votre moyenne est".$moys ?>" class="form-control" id="floatingPassword" >
   
     </div>
-    <div class="form-floating mb-3">
-      <input type="text" id="snote3" value="<?php echo '8'?>" class="form-control" id="floatingPassword" >
-  
     </div>
-    <div class="form-floating mb-3">
-      <input type="text" id="snote4" value="<?php echo '16'?>" class="form-control" id="floatingPassword" >
-  
+   
     </div>
-    <div class="form-floating mb-3">
-      <input type="text" id="moy1" class="form-control"value="<?php echo'Votre moyenne est'.$moys ?>" id="floatingPassword" >
-  
-    </div>
-</div>
+<script>
+//adding coloring depending on the value of the note
+  let notes = document.querySelectorAll(".note");
 
+  notes.forEach(note => {
+    if (parseFloat(note.value) >= 10) {
+      note.style.backgroundColor = "lightgreen";
+    } else {
+      note.style.backgroundColor = "red";
+    }
+  });
+</script>
+
+
+
+  
 
 </body>
 </html>
