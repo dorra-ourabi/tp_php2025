@@ -1,20 +1,13 @@
-
 <?php
-require("Utilisateur.php");
+$id=$_POST['id'];
+$name=$_POST['nom'];
+$birthday=$_POST['birthday'];
+$section=$_POST['section'];
+$url=$_POST['url'];
+require ("ConnexionBD.php");?>
 
-session_start();
-session_destroy(); //  clears session completely
-session_start();   // start a new one
-/*in my database I inserted 2 lignes the one with
-id=7 is an admin 
-and the other with 
-id=8 is a user*/
-if (!isset($_SESSION['utilisateur'])) {
-    $_SESSION['utilisateur'] = Utilisateur::getById(7); // if you want to be a user change 7 to 8
-}
-$utilisateur = $_SESSION['utilisateur'];
-//echo  "you're connected as a ".$utilisateur->getRole();
-?>
+
+
 
 
 <!DOCTYPE html>
@@ -74,19 +67,20 @@ $utilisateur = $_SESSION['utilisateur'];
       height:30px;
       width:30px;
     }
-    .added{
-      margin-left:20px;
-      margin-top:15px;
-    }
   </style>
 </head>
 
 <?php
 
 $bd=ConnexionBD::getInstance();
-$req="select * from etudiant";
-$response=$bd->query($req);
-$elements=$response->fetchALL(PDO::FETCH_OBJ);?> 
+$req = $bd->prepare("INSERT INTO etudiant (id, name, birthday, section, image) VALUES (?, ?, ?, ?, ?)");
+$req->execute([$id, $name, $birthday, $section, $url]);
+
+
+$req1=$bd->prepare("select * from etudiant where id=?");
+$req1->execute(array($id));
+$elem=$req1->fetch(PDO::FETCH_OBJ);
+?> 
 
 <body>
 
@@ -135,7 +129,7 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ);?>
 
  
 
-<?php  echo  "you're connected as a ".$utilisateur->getRole();?>
+
 
 
 
@@ -166,14 +160,7 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ);?>
     <p>liste des etudiants</p>
 </div>
 <!-- Adding a filter-->
-<form action="search.php" method="post" >
-<div class="input-group mb-3 contain">
-  <input name="student_name" type="text" class="form-control filter" placeholder="write the name of the student" aria-label="Recipient's username" aria-describedby="button-addon2">
-  <input class="btn btn-outline-secondary search" type="submit" id="button-addon2" value="Search">
-  <?php if ($utilisateur->isAdmin()): ?>
-    <a href="http://localhost:8000/add.php"><img src="https://icons.iconarchive.com/icons/ionic/ionicons/256/person-add-outline-icon.png" class="icon added"></img></a>
-    <?php endif;?>
-</div>
+
   
   <!-- Table -->
   <div class="container mt-4">
@@ -185,12 +172,12 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ);?>
           <th>name</th>
           <th>birthday</th>
           <th>Section</th>
-          <th>Actions</th>
+          
           
         </tr>
       </thead>
       <tbody>
-        <?php foreach($elements as $elem):?>
+        
         <tr>
           <td><?php echo $elem->id?></td>
         
@@ -198,16 +185,11 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ);?>
           <td><?php echo $elem->name?></td>
           <td><?php echo $elem->birthday?></td>
           <td><?php echo $elem->section?></td>
-          <td><a href="http://localhost:8000/info.php?id=<?= $elem->id?>"><img src="https://icons.iconarchive.com/icons/amitjakhu/drip/256/information-icon.png" class="icon"></img></a>
-          <?php if ($utilisateur->isAdmin()): ?>
-            
-            <a href="http://localhost:8000/delete.php?id=<?php echo $elem->id?>"><img src="https://icons.iconarchive.com/icons/aniket-suvarna/box-regular/256/bx-eraser-icon.png" class="icon"></img></a>
-            <a href="http://localhost:8000/update.php?id=<?php echo $elem->id?>"><img src="https://icons.iconarchive.com/icons/arturo-wibawa/akar/256/edit-icon.png" class="icon"></img></a>
-            <?php endif;?></td> 
+          
 
           
         </tr>
-        <?php endforeach;?>
+       
         <!-- more rows -->
       </tbody>
     </table>
@@ -222,6 +204,6 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ);?>
       });
     });
   </script>
- 
+ <h1>Added succefulyy</h1>
 </body>
 </html>

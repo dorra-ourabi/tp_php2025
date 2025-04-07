@@ -1,5 +1,6 @@
+<?php 
+$name=$_POST["student_name"];
 
-<?php
 require("Utilisateur.php");
 
 session_start();
@@ -13,7 +14,7 @@ if (!isset($_SESSION['utilisateur'])) {
     $_SESSION['utilisateur'] = Utilisateur::getById(7); // if you want to be a user change 7 to 8
 }
 $utilisateur = $_SESSION['utilisateur'];
-//echo  "you're connected as a ".$utilisateur->getRole();
+echo  "you're connected as a ".$utilisateur->getRole();
 ?>
 
 
@@ -70,23 +71,15 @@ $utilisateur = $_SESSION['utilisateur'];
       background-color:red;
       color:white;
     }
-    .icon{
-      height:30px;
-      width:30px;
-    }
-    .added{
-      margin-left:20px;
-      margin-top:15px;
-    }
   </style>
 </head>
 
 <?php
 
 $bd=ConnexionBD::getInstance();
-$req="select * from etudiant";
-$response=$bd->query($req);
-$elements=$response->fetchALL(PDO::FETCH_OBJ);?> 
+$req=$bd->prepare("select * from etudiant where name=?");
+$req->execute(array($name));
+$elements=$req->fetchAll(PDO::FETCH_OBJ);?> 
 
 <body>
 
@@ -135,7 +128,7 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ);?>
 
  
 
-<?php  echo  "you're connected as a ".$utilisateur->getRole();?>
+
 
 
 
@@ -165,15 +158,7 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ);?>
   <div class="liste_etud">
     <p>liste des etudiants</p>
 </div>
-<!-- Adding a filter-->
-<form action="search.php" method="post" >
-<div class="input-group mb-3 contain">
-  <input name="student_name" type="text" class="form-control filter" placeholder="write the name of the student" aria-label="Recipient's username" aria-describedby="button-addon2">
-  <input class="btn btn-outline-secondary search" type="submit" id="button-addon2" value="Search">
-  <?php if ($utilisateur->isAdmin()): ?>
-    <a href="http://localhost:8000/add.php"><img src="https://icons.iconarchive.com/icons/ionic/ionicons/256/person-add-outline-icon.png" class="icon added"></img></a>
-    <?php endif;?>
-</div>
+
   
   <!-- Table -->
   <div class="container mt-4">
@@ -198,11 +183,11 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ);?>
           <td><?php echo $elem->name?></td>
           <td><?php echo $elem->birthday?></td>
           <td><?php echo $elem->section?></td>
-          <td><a href="http://localhost:8000/info.php?id=<?= $elem->id?>"><img src="https://icons.iconarchive.com/icons/amitjakhu/drip/256/information-icon.png" class="icon"></img></a>
+          <td><a href="http://localhost:8000/info.php?id=<?= $elem->id?>">detail</a>
           <?php if ($utilisateur->isAdmin()): ?>
             
-            <a href="http://localhost:8000/delete.php?id=<?php echo $elem->id?>"><img src="https://icons.iconarchive.com/icons/aniket-suvarna/box-regular/256/bx-eraser-icon.png" class="icon"></img></a>
-            <a href="http://localhost:8000/update.php?id=<?php echo $elem->id?>"><img src="https://icons.iconarchive.com/icons/arturo-wibawa/akar/256/edit-icon.png" class="icon"></img></a>
+            <a href="http://localhost:8000/delete.php?id=<?php echo $elem->id?>">delete</a>
+            <a href="http://localhost:8000/update.php?id=<?php echo $elem->id?>">update</a>
             <?php endif;?></td> 
 
           
@@ -222,6 +207,7 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ);?>
       });
     });
   </script>
- 
+  <!--<script>
+    let filter=document.querySelector(".filter");-->
 </body>
 </html>

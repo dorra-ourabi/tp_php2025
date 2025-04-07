@@ -37,10 +37,10 @@ $req1 = $bd->prepare("delete from etudiant  WHERE id = ?");
 $req1->execute(array($id));
 
 // Select query to get the updated data
-$req2 = $bd->prepare("SELECT * FROM etudiant" );
+$req2 = "SELECT * FROM etudiant" ;
 
-
-$elem2 = $req2->fetchALL(PDO::FETCH_OBJ);
+$res2=$bd->query($req2);
+$elem2 = $res2->fetchALL(PDO::FETCH_OBJ);
 ?>
 <body>
 
@@ -58,11 +58,11 @@ $elem2 = $req2->fetchALL(PDO::FETCH_OBJ);
       <tbody>
         <tr>
         <?php foreach ($elem2 as $elem):?>
-          <td><?= $elem2->id ?></td>
-          <td><img src="<?= $elem2->image ?>" class="pic"></td>
-          <td><?= $elem2->name ?></td>
-          <td><?= $elem2->birthday ?></td>
-          <td><?= $elem2->section ?></td>
+          <td><?= $elem->id ?></td>
+          <td><img src="<?= $elem->image ?>" class="pic"></td>
+          <td><?= $elem->name ?></td>
+          <td><?= $elem->birthday ?></td>
+          <td><?= $elem->section ?></td>
         </tr>
         <?php endforeach?>
       </tbody>

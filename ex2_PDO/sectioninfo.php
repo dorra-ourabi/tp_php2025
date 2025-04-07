@@ -35,7 +35,7 @@ if(!$des){
 }
 $req1=$bd->prepare("select * from etudiant where section= ?");
 $req1->execute(array($des));
-$elem=$req1->fetch(PDO::FETCH_OBJ);?>
+$elements=$req1->fetchAll(PDO::FETCH_OBJ);?>
 <body>
 <h1>La liste des etudiants inscrits est:</h1>
 <div class="container mt-4">
@@ -54,6 +54,7 @@ $elem=$req1->fetch(PDO::FETCH_OBJ);?>
       <tbody>
      
         <tr>
+          <?php foreach($elements as $elem):?>
           <td><?= $elem->id?></td>
         
           <td><img src="<?= $elem->image?>" class="pic"></td>
@@ -64,7 +65,7 @@ $elem=$req1->fetch(PDO::FETCH_OBJ);?>
           
           
         </tr>
-       
+       <?php endforeach;?>
         <!-- more rows -->
       </tbody>
     </table>
