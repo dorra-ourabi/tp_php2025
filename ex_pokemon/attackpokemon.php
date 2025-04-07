@@ -70,206 +70,21 @@
           
       </style>
 </head>
-<!-- creating classes-->
+<!-- calling classes-->
 <?php
-    class AttackPokemon {
-        private int $attackMinimal;
-        private int $attackMaximal;
-        private int $specialAttack;
-        private int $probabilitySpecialAttack;
+ require("classAttackPokemon.php");
+ 
+ require("classPokemonFeu.php");
+ require("classPokemonEau.php");
+ require("classPokemonPlante.php");
+ 
+    
 
-        public function __construct(int $am = 10, int $aM = 50, int $sa = 2, int $psa = 50) {
-            $this->attackMinimal = $am;
-            $this->attackMaximal = $aM;
-            $this->specialAttack = $sa;
-            $this->probabilitySpecialAttack = $psa;
-        }
 
-        // Display attack stats
-        public function affich_attack_stats() {
-            foreach ($this as $cle => $valeur) {
-                print "$cle => $valeur\n";
-            }
-        }
 
-        // Getters
-        public function get_attackMinimal(): int {
-            return $this->attackMinimal;
-        }
 
-        public function get_attackMaximal(): int {
-            return $this->attackMaximal;
-        }
 
-        public function get_specialAttack(): int {
-            return $this->specialAttack;
-        }
 
-        public function get_probabilitySpecialAttack(): int {
-            return $this->probabilitySpecialAttack;
-        }
-
-        // Setters
-        public function set_attackMinimal(int $am) {
-            $this->attackMinimal = $am;
-        }
-
-        public function set_attackMaximal(int $aM) {
-            $this->attackMaximal = $aM;
-        }
-
-        public function set_specialAttack(int $sa) {
-            $this->specialAttack = $sa;
-        }
-
-        public function set_probabilitySpecialAttack(int $sa) {
-            $this->probabilitySpecialAttack = $sa;
-        }
-        public function isSpecialAttack(){
-            return rand(1, 100) <= $this->probabilitySpecialAttack;        }
-    }
-
-class Pokemon {
-    protected $name;
-    protected $url;
-    protected $hp;
-    protected $attackPokemon;
-
-    public function __construct($name, $url, $hp, $attackPokemon) {
-        $this->name = $name;
-        $this->url = $url;
-        $this->hp = $hp;
-        $this->attackPokemon = $attackPokemon;
-    }
-
-    public function getName() {
-        return $this->name;
-    }
-
-    public function getUrl() {
-        return $this->url;
-    }
-
-    public function getHp() {
-        return $this->hp;
-    }
-
-    public function isDead() {
-        return $this->hp <= 0;
-    }
-
-    public function attack(Pokemon $p) {
-        $attackPoints = rand($this->attackPokemon->get_attackMinimal(), $this->attackPokemon->get_attackMaximal());
-        
-        if ($this->attackPokemon->isSpecialAttack()) {
-            $attackPoints *= $this->attackPokemon->get_specialAttack();
-        }
-        $p->reduceHp($attackPoints);
-        return $attackPoints;
-    }
-
-    public function reduceHp($damage) {
-        $this->hp -= $damage;
-    }
-
-    public function whoAmI() {
-        echo "<h3>{$this->name}</h3>";
-        echo "<img src='{$this->url}' alt='{$this->name}' width='100'><br>";
-        echo "Points de vie : {$this->hp}<br>";
-    }
-}
-
-class PokemonFeu extends Pokemon {
-  private $type;
-
-  public function __construct($name, $url, $hp, $attackPokemon, $type){
-      parent::__construct($name, $url, $hp, $attackPokemon);
-      $this->type=$type;
-  }
-
-  public function get_type(){
-      return $this->type;
-  }
-  public function attack(Pokemon $p) {
-      $attackPoints = rand($this->attackPokemon->get_attackMinimal(), $this->attackPokemon->get_attackMaximal());
-      
-      if ($this->attackPokemon->isSpecialAttack()) {
-          $attackPoints *= $this->attackPokemon->get_specialAttack();
-      }
-      if (method_exists($p, 'get_type')) {
-          $str = $p->get_type(); 
-          if ($str == 'plante') {
-              $attackPoints *= 2;
-          }
-          else{
-              $attackPoints *= 0.5;
-          }
-      }
-          $p->reduceHp($attackPoints);
-          return $attackPoints;
-      }
-}
-class PokemonEau extends Pokemon {
-  private $type;
-
-  public function __construct($name, $url, $hp, $attackPokemon, $type){
-      parent::__construct($name, $url, $hp,  $attackPokemon);
-      $this->type=$type;
-  }
-
-  public function get_type(){
-      return $this->type;
-  }
-  public function attack(Pokemon $p) {
-      $attackPoints = rand($this->attackPokemon->get_attackMinimal(), $this->attackPokemon->get_attackMaximal());
-      
-      if ($this->attackPokemon->isSpecialAttack()) {
-          $attackPoints *= $this->attackPokemon->get_specialAttack();
-      }
-      if (method_exists($p, 'get_type')) {
-        $str = $p->get_type(); 
-          if ($str == 'feu') {
-              $attackPoints *= 2;
-          }
-          else{
-              $attackPoints *= 0.5;
-          }
-      }
-          $p->reduceHp($attackPoints);
-          return $attackPoints;
-      }
-}
-class PokemonPlante extends Pokemon {
-  private $type;
-  public function __construct($name, $url, $hp, $attackPokemon, $type){
-      parent::__construct($name, $url, $hp,  $attackPokemon);
-      $this->type=$type;
-  }
-
-  
-
-  public function get_type(){
-      return $this->type;
-  }
-  public function attack(Pokemon $p) {
-      $attackPoints = rand($this->attackPokemon->get_attackMinimal(), $this->attackPokemon->get_attackMaximal());
-      
-      if ($this->attackPokemon->isSpecialAttack()) {
-          $attackPoints *= $this->attackPokemon->get_specialAttack();
-      }
-      if (method_exists($p, 'get_type')) {
-        $str = $p->get_type(); 
-          if ($str == 'eau') {
-              $attackPoints *= 2;
-          }
-          else{
-              $attackPoints *= 0.5;
-          }
-      }
-          $p->reduceHp($attackPoints);
-          return $attackPoints;
-      }
-}
 
 $types = ["eau", "feu", "plante", "normal"];
 $type1= $types[array_rand($types)];
@@ -278,7 +93,7 @@ $type2= $types[array_rand($types)];
 
 $att1=new AttackPokemon(10,100,2,20);
 $att2=new AttackPokemon(30,80,4,20);
-
+//générer un combat aléatoire
 if ($type1=="eau"){
   $p1=new PokemonEau("dracau eau","https://l.messenger.com/l.php?u=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%253AANd9GcSA5v9MbFBvw7cenr5_twJ62NRKkv7SbSceZg%26s&h=AT18GnfXmsJflHAGzEm3yyyarrkosIQctx7QsyxzzJAuLoJglN40-jaERpyzV3BkN_kHdse5WFb4TVTrCAVtNlUhtsxyE0YwXeERnkPM63yTSpLi3B8EM2SYeWK37g",200, $att1,"eau");
 }
