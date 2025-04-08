@@ -11,7 +11,7 @@ id=7 is an admin
 and the other with 
 id=8 is a user*/
 if (!isset($_SESSION['utilisateur'])) {
-    $_SESSION['utilisateur'] = Utilisateur::getById(7); // if you want to be a user change 7 to 8
+    $_SESSION['utilisateur'] = Utilisateur::getById(8); // if you want to be a user change 7 to 8
 }
 $utilisateur = $_SESSION['utilisateur'];
 echo  "you're connected as a ".$utilisateur->getRole();
@@ -70,6 +70,10 @@ echo  "you're connected as a ".$utilisateur->getRole();
     .search{
       background-color:red;
       color:white;
+    }
+    .icon{
+      height:30px;
+      width:30px;
     }
   </style>
 </head>
@@ -183,11 +187,11 @@ $elements=$req->fetchAll(PDO::FETCH_OBJ);?>
           <td><?php echo $elem->name?></td>
           <td><?php echo $elem->birthday?></td>
           <td><?php echo $elem->section?></td>
-          <td><a href="http://localhost:8000/info.php?id=<?= $elem->id?>">detail</a>
+          <td><a href="http://localhost:8000/info.php?id=<?= $elem->id?>"><img src="https://icons.iconarchive.com/icons/amitjakhu/drip/256/information-icon.png" class="icon"></img></a>
           <?php if ($utilisateur->isAdmin()): ?>
             
-            <a href="http://localhost:8000/delete.php?id=<?php echo $elem->id?>">delete</a>
-            <a href="http://localhost:8000/update.php?id=<?php echo $elem->id?>">update</a>
+            <a href="http://localhost:8000/delete.php?id=<?php echo $elem->id?>"><img src="https://icons.iconarchive.com/icons/aniket-suvarna/box-regular/256/bx-eraser-icon.png" class="icon"></img></a>
+            <a href="http://localhost:8000/update.php?id=<?php echo $elem->id?>"><img src="https://icons.iconarchive.com/icons/arturo-wibawa/akar/256/edit-icon.png" class="icon"></img></a>
             <?php endif;?></td> 
 
           
