@@ -10,7 +10,7 @@ id=7 is an admin
 and the other with 
 id=8 is a user*/
 if (!isset($_SESSION['utilisateur'])) {
-    $_SESSION['utilisateur'] = Utilisateur::getById(8); // if you want to be a user change 7 to 8
+    $_SESSION['utilisateur'] = Utilisateur::getById(7); // if you want to be a user change 7 to 8
 }
 $utilisateur = $_SESSION['utilisateur'];
 
