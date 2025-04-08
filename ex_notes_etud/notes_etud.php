@@ -6,19 +6,7 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
-    .form-floating{
-        margin:20px 20px 20px 20px;
-        margin-top:20px;
-    }
-    #note4,#note7,#note8,#note9,#snote3{
-      background-color:red;
-    } 
-    #note1,#note2,#note3,#note6,#snote1,#snote2,#snote4{
-      background-color:lightgreen;
-    } 
-    #note5{
-      background-color:lightyellow;
-    }
+    
     #moy,#moy1{
       background-color:lightblue;
     }
@@ -130,10 +118,13 @@ $moys=$skander->calculer_moyenne();?>
   let notes = document.querySelectorAll(".note");
 
   notes.forEach(note => {
-    if (parseFloat(note.value) >= 10) {
+    if (parseFloat(note.value) > 10) {
       note.style.backgroundColor = "lightgreen";
-    } else {
-      note.style.backgroundColor = "red";
+    } else if(parseFloat(note.value) == 10){
+      note.style.backgroundColor = "lightyellow";
+    }
+    else{
+      note.style.backgroundColor="red";
     }
   });
 </script>
