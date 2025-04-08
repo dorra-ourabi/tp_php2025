@@ -40,6 +40,10 @@
         background-color:rgb(202, 195, 196);
         padding:20px;
     }
+    .icon{
+      height:30px;
+      width:30px;
+    }
   </style>
 </head>
 
@@ -96,7 +100,7 @@ $elements=$response->fetchALL(PDO::FETCH_OBJ); ?>
           <td><?php echo $elem->id?></td>
           <td><?php echo $elem->désignation?></td>
           <td><?php echo $elem->descrition?></td>
-          <td><a href="http://localhost:8000/sectioninfo.php?des=<?php echo $elem->désignation?>">liste des etudiants inscrit</a></td>
+          <td><a href="http://localhost:8000/sectioninfo.php?des=<?php echo $elem->désignation?>"><img src="https://icons.iconarchive.com/icons/ionic/ionicons/256/list-outline-icon.png" class="icon"></img></a></td>
           
           
         </tr>

@@ -13,7 +13,7 @@ if (!isset($_SESSION['utilisateur'])) {
     $_SESSION['utilisateur'] = Utilisateur::getById(7); // if you want to be a user change 7 to 8
 }
 $utilisateur = $_SESSION['utilisateur'];
-//echo  "you're connected as a ".$utilisateur->getRole();
+
 ?>
 
 
